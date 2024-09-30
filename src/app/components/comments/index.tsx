@@ -40,7 +40,7 @@ const commentsArr: commentArrTypes[] = [
 const Comments = () => {
 	const [commentsContent, setCommentsContent] = useState(commentsArr);
 	const [commentText, setCommentText] = useState('');
-	const [isAlert, setIsAlert] = useState(true);
+	const [isAlert, setIsAlert] = useState(false);
 
 	const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCommentText(e.target.value);
