@@ -1,0 +1,45 @@
+.comment_tooltip {
+    position: relative;
+}
+
+.comment_tooltip::before {
+    position: absolute;
+    top: -2rem;
+    content: "See comments";
+    width: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    height: fit-content;
+    padding: 2px 5px;
+    background-color: rgb(46, 107, 239);
+    animation: bounce 1s infinite; /* Apply the bounce animation */
+}
+
+.comment_tooltip::after {
+    position: absolute;
+    top: -0.5rem; /* Move it below the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent; /* Half of the base width */
+    border-right: 5px solid transparent; /* Half of the base width */
+    border-top: 10px solid rgb(46, 107, 239); /* The color of the triangle */
+    animation: bounce 1s infinite; /* Apply the same bounce animation */
+}
+
+/* Keyframe animation for bouncing effect */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0); /* Starting position */
+    }
+    50% {
+        transform: translateY(-0.5rem); /* Move up */
+    }
+}
