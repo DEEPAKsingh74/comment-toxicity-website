@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 import { axiosInstance } from "./network_config";
 
-const ACCESS_ID = procecss.env.AZURE_ID;
+const ACCESS_ID = process.env.AZURE_ID;
 
 export class ReactQueryClass {
 	base_instance: AxiosInstance | null = null;
