@@ -4,6 +4,7 @@ import { Send } from 'lucide-react';
 import { Roboto } from 'next/font/google';
 import { ReactQueryClass } from '@/app/utils/query';
 import CustomAlertDialog from '../alert_dialog/CustomAlert';
+import "./comment.css"
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -41,13 +42,15 @@ const Comments = () => {
 	const [commentsContent, setCommentsContent] = useState(commentsArr);
 	const [commentText, setCommentText] = useState('');
 	const [isAlert, setIsAlert] = useState(false);
-
+	const [isRequesting, setIsRequesting] = useState(false);
+ 
 	const handleCommentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCommentText(e.target.value);
 	};
 
 	const handleAddComment = async (newComment: string) => {
 		if (newComment.trim() === '') return; // Ignore empty comments
+		setIsRequesting(true);
 
 		const predictCommentToxicity = await new ReactQueryClass().getPredictions('/predict', newComment);
 
@@ -56,6 +59,7 @@ const Comments = () => {
 			if (predictCommentToxicity[key] > 0.5) {
 				setIsAlert(true);
 				setCommentText('');
+				setIsRequesting(false);
 				return;
 			}
 		}
@@ -70,6 +74,7 @@ const Comments = () => {
 
 		setCommentsContent((prevComments) => [...prevComments, newCommentText]);
 		setCommentText('');
+		setIsRequesting(false);
 	};
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -98,12 +103,23 @@ const Comments = () => {
 						onKeyDown={handleKeyDown}
 					/>
 				</div>
-				<div
-					className="w-[10%] h-[100%] justify-center items-center flex text-black/70 cursor-pointer"
-					onClick={() => handleAddComment(commentText)}
-				>
-					<Send />
-				</div>
+				{
+    isRequesting ? 
+    <div
+        className="w-[10%] h-[100%] justify-center items-center flex text-black/70 cursor-pointer"
+    >
+        {/* You can use any loader, here I'm using a simple spinner */}
+        <div className="loader"></div>
+    </div>
+    : 
+    <div
+        className="w-[10%] h-[100%] justify-center items-center flex text-black/70 cursor-pointer"
+        onClick={() => handleAddComment(commentText)}
+    >
+        <Send />
+    </div>
+}
+
 			</div>
 
 			{/* Alert Dialog */}
