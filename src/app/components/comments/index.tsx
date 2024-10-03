@@ -4,7 +4,7 @@ import { Send } from 'lucide-react';
 import { Roboto } from 'next/font/google';
 import { ReactQueryClass } from '@/app/utils/query';
 import CustomAlertDialog from '../alert_dialog/CustomAlert';
-import "./comment.css"
+import "./comments.css"
 
 const roboto = Roboto({
 	subsets: ['latin'],
