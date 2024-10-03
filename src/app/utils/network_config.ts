@@ -1,8 +1,10 @@
 import axios from "axios";
 
 // axios base configurations
+const BASE_URL = process.env.REQUEST_BASE_URL;
+
 export const axiosInstance = axios.create({
-  baseURL: "https://super-duper-space-computing-machine-4j7xrjw55jq35q9q-5000.app.github.dev",
+  baseURL: `${BASE_URL}`,	
   headers: {
 	"Content-Type": "application/json",
   },
